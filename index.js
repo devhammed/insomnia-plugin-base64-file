@@ -15,17 +15,23 @@ module.exports.templateTags = [{
       type: 'file',
     },
     {
+      displayName: 'Prefix',
+      type: 'string',
+      description: 'Text to use as prefix e.g for data URLs',
+      defaultValue: '',
+    },
+    {
       displayName: 'Quote',
       description: 'Enclose the result in quotes',
       defaultValue: false,
       type: 'boolean',
     },
   ],
-  run (context, path, quote) {
+  run (context, path, prefix, quote) {
     console.log('PATH: ', path, quote);
     let ret;
     try {
-      ret = encodePath(path);
+      ret = prefix + encodePath(path);
     } catch (err) {
       throw new Error(`Cannot encode: ${err.message}`);
     }
